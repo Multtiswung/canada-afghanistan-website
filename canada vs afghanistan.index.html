@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canada & Afghanistan — 2001</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0d1117;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 15, 22, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #30363d;
+      padding: 15px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ff453a;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: #ff453a;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+
+      background:
+        linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.78)),
+        url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=2000&q=80");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: .95;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #ff453a;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 25px;
+      background: #ff453a;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: .3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: #ff5e55;
+      box-shadow: 0 10px 30px rgba(255,69,58,.25);
+    }
+
+    /* GENERAL */
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #9da7b3;
+      max-width: 750px;
+      margin: 0 auto 50px;
+    }
+
+    /* FLAGS */
+    .countries {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 30px;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .country-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 20px;
+      padding: 35px;
+      text-align: center;
+      transition: .3s;
+    }
+
+    .country-card:hover {
+      transform: translateY(-8px);
+      border-color: #ff453a;
+    }
+
+    .flag {
+      font-size: 5rem;
+      margin-bottom: 15px;
+    }
+
+    .country-card h3 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .vs {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ff453a;
+    }
+
+    /* FACT CARDS */
+    .facts {
+      background: #11161d;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .fact {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 18px;
+      padding: 30px;
+      transition: .3s;
+    }
+
+    .fact:hover {
+      transform: translateY(-5px);
+      border-color: #ff453a;
+    }
+
+    .fact-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .fact h3 {
+      margin-bottom: 10px;
+    }
+
+    .fact p {
+      color: #aeb7c2;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      max-width: 900px;
+      margin: auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      top: 0;
+      bottom: 0;
+      background: #ff453a;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      width: 50%;
+      padding: 20px 40px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #ff453a;
+      border-radius: 50%;
+      top: 30px;
+      right: -9px;
+      border: 4px solid #0d1117;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -9px;
+    }
+
+    .timeline-content {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .date {
+      color: #ff6259;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    /* IMAGE GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: .4s;
+      filter: grayscale(20%);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    /* QUIZ */
+    .quiz {
+      max-width: 750px;
+      margin: auto;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 20px;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .question {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer {
+      background: #21262d;
+      color: white;
+      border: 1px solid #30363d;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .answer:hover {
+      background: #30363d;
+    }
+
+    .correct {
+      background: #238636 !important;
+    }
+
+    .wrong {
+      background: #da3633 !important;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      min-height: 25px;
+    }
+
+    /* SOURCES */
+    .sources {
+      background: #11161d;
+      text-align: center;
+    }
+
+    .sources a {
+      color: #ff6259;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #080b0f;
+      color: #777;
+    }
+
+    /* ANIMATION */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      nav a {
+        margin: 0 7px;
+      }
+
+      .countries {
+        grid-template-columns: 1fr;
+      }
+
+      .vs {
+        text-align: center;
+      }
+
+      .fact-grid,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        left: 10px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        text-align: left;
+        padding-left: 40px;
+        padding-right: 0;
+      }
+
+      .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: 1px;
+        right: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">🇨🇦 CANADA × AFGHANISTAN</div>
+
+    <div>
+      <a href="#overview">Overview</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#quiz">Quiz</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Canada &<br><span>Afghanistan</span></h1>
+
+      <p>
+        Understanding Canada's involvement in Afghanistan beginning in 2001.
+      </p>
+
+      <a href="#overview" class="btn">Explore the Story ↓</a>
+    </div>
+  </header>
+
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+
+    <h2 class="section-title">It Wasn't Simply "Canada vs Afghanistan"</h2>
+
+    <p class="section-subtitle">
+      Canada's involvement began after the September 11, 2001 terrorist attacks.
+      Canada joined an international coalition whose initial military campaign
+      targeted al-Qaeda and the Taliban regime in Afghanistan.
+    </p>
+
+    <div class="countries">
+
+      <div class="country-card">
+        <div class="flag">🇨🇦</div>
+        <h3>Canada</h3>
+        <p>
+          Contributed naval forces, aircraft, special forces and later
+          conventional troops to the international mission.
+        </p>
+      </div>
+
+      <div class="vs">×</div>
+
+      <div class="country-card">
+        <div class="flag">🇦🇫</div>
+        <h3>Afghanistan</h3>
+        <p>
+          A country already affected by decades of conflict. In 2001,
+          the Taliban controlled much of the country.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FACTS -->
+  <section class="facts">
+
+    <h2 class="section-title">⚡ Quick Facts</h2>
+
+    <p class="section-subtitle">
+      A few important facts to understand the events of 2001.
+    </p>
+
+    <div class="fact-grid">
+
+      <div class="fact">
+        <div class="fact-icon">📅</div>
+        <h3>September 11, 2001</h3>
+        <p>
+          Al-Qaeda carried out terrorist attacks in the United States,
+          killing nearly 3,000 people.
+        </p>
+      </div>
+
+      <div class="fact">
+        <div class="fact-icon">🇨🇦</div>
+        <h3>October 7, 2001</h3>
+        <p>
+          Canada announced that it would contribute air, land and sea
+          forces to the international campaign.
+        </p>
+      </div>
+
+      <div class="fact">
+        <div class="fact-icon">⚓</div>
+        <h3>Operation APOLLO</h3>
+        <p>
+          Canada's contribution included naval forces operating in the
+          Arabian Sea and surrounding region.
+        </p>
+      </div>
+
+      <div class="fact">
+        <div class="fact-icon">🪖</div>
+        <h3>Special Forces</h3>
+        <p>
+          Canadian special forces members arrived in Afghanistan
+          in late 2001.
+        </p>
+      </div>
+
+      <div class="fact">
+        <div class="fact-icon">🌍</div>
+        <h3>International Mission</h3>
+        <p>
+          Canada's role was part of a much larger international effort,
+          rather than a standalone war between two countries.
+        </p>
+      </div>
+
+      <div class="fact">
+        <div class="fact-icon">⏳</div>
+        <h3>Long-Term Mission</h3>
+        <p>
+          Canada's involvement eventually lasted more than a decade,
+          ending its military mission in 2014.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+
+    <h2 class="section-title">🕰️ The Timeline</h2>
+
+    <p class="section-subtitle">
+      Follow the key events that connected Canada to the conflict.
+    </p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="date">September 11, 2001</div>
+
+          <h3>9/11 Attacks</h3>
+
+          <p>
+            Al-Qaeda terrorists attack the United States.
+            The attacks become the catalyst for a major international
+            response.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="date">October 7, 2001</div>
+
+          <h3>Canada Joins the Campaign</h3>
+
+          <p>
+            Canada announces that it will contribute military forces
+            to the international campaign against terrorism.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="date">Late 2001</div>
+
+          <h3>Canadian Special Forces Arrive</h3>
+
+          <p>
+            Canadian special forces members arrive in Afghanistan
+            to support multinational counter-terrorism operations.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="date">February 2002</div>
+
+          <h3>Canadian Battle Group Arrives</h3>
+
+          <p>
+            The first major Canadian army contingent arrives in Afghanistan
+            and operates alongside American forces.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="date">2003–2014</div>
+
+          <h3>Mission Expands</h3>
+
+          <p>
+            Canada's role evolves through security, combat, reconstruction
+            and training missions before the military mission ends in 2014.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- GALLERY -->
+  <section id="gallery" class="facts">
+
+    <h2 class="section-title">📸 Visual Gallery</h2>
+
+    <p class="section-subtitle">
+      historical photographs from reputable
+      archives such as the Canadian War Museum or Government of Canada.
+    </p>
+
+    <div class="gallery">
+
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1DnLrmwCeCE46znLvfKBikGJqY4ExnKr5m-P_okJZ2w&s=10">
+
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzJDPwDv8K93qs0-26-wP0bYb5k3TiFnlx0YmHyUQavw&s=10">
+
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9lQey7TGqa3FIWRoU1sNgeI7ATSWVu8JC3cjcITmFJg&s=10">
+
+    </div>
+  </section>
+
+
+  <!-- QUIZ -->
+  <section id="quiz">
+
+    <h2 class="section-title">🎯 Test Your Knowledge</h2>
+
+    <p class="section-subtitle">
+      Think you know the history? Try this quick quiz.
+    </p>
+
+    <div class="quiz">
+
+      <div class="question" id="question">
+        When did Canada announce its contribution to the international
+        campaign in Afghanistan?
+      </div>
+
+      <div class="answers">
+
+        <button class="answer" onclick="checkAnswer(this, false)">
+          September 11, 2001
+        </button>
+
+        <button class="answer" onclick="checkAnswer(this, true)">
+          October 7, 2001
+        </button>
+
+        <button class="answer" onclick="checkAnswer(this, false)">
+          December 25, 2001
+        </button>
+
+        <button class="answer" onclick="checkAnswer(this, false)">
+          February 2002
+        </button>
+
+      </div>
+
+      <div id="result"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SOURCES -->
+  <section class="sources">
+
+    <h2 class="section-title">📚 Learn More</h2>
+
+    <p class="section-subtitle">
+      For a school project, use reliable historical sources rather than
+      random social-media posts.
+    </p>
+
+    <p>
+      <a href="https://www.canada.ca/en/services/defence/caf/militaryhistory/wars-operations/afghanistan.html"
+         target="_blank">
+        Government of Canada — Canada in Afghanistan
+      </a>
+    </p>
+
+    <br>
+
+    <p>
+      <a href="https://www.warmuseum.ca/remembrance-day-resources/canada-and-the-war-in-afghanistan"
+         target="_blank">
+        Canadian War Museum — Canada and the War in Afghanistan
+      </a>
+    </p>
+
+    <br>
+
+    <p>
+      <a href="https://www.veterans.gc.ca/en/remembrance/military-history/afghanistan"
+         target="_blank">
+        Veterans Affairs Canada — Afghanistan
+      </a>
+    </p>
+
+  </section>
+
+
+  <footer>
+    <p>🇨🇦 🇦🇫 Educational History Project • 2001</p>
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    function checkAnswer(button, correct) {
+
+      const result = document.getElementById("result");
+
+      const buttons = document.querySelectorAll(".answer");
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (correct) {
+
+        button.classList.add("correct");
+
+        result.innerHTML =
+          "✅ Correct! Canada announced its contribution on October 7, 2001.";
+
+      } else {
+
+        button.classList.add("wrong");
+
+        result.innerHTML =
+          "❌ Not quite. The answer was October 7, 2001.";
+
+      }
+    }
+
+
+    // Small reveal animation when scrolling
+    const items = document.querySelectorAll(
+      ".fact, .country-card, .timeline-content, .gallery img"
+    );
+
+    const observer = new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+
+    items.forEach(item => {
+
+      item.style.opacity = "0";
+      item.style.transform = "translateY(20px)";
+      item.style.transition = "opacity .6s ease, transform .6s ease";
+
+      observer.observe(item);
+
+    });
+
+  </script>
+
+</body>
+</html>
+
